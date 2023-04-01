@@ -1,4 +1,4 @@
-# `TAISS` Project **IoT** Smart Contract
+# `TAISS` Project - **IoT** smart contract
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pinax-network/taiss-contract/blob/main/LICENSE-MIT)
 [![Antelope CDT](https://github.com/pinax-network/taiss-contract/actions/workflows/release.yml/badge.svg)](https://github.com/pinax-network/taiss-contract/actions/workflows/release.yml)
 [![Blanc++ Vert](https://github.com/pinax-network/taiss-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/pinax-network/taiss-contract/actions/workflows/ci.yml)
