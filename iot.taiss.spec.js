@@ -34,9 +34,9 @@ describe('iot.taiss', () => {
   });
 
   it("data", async () => {
-    await contract.actions.data([device_id, 25.5, 60.0, 1013.0]).send();
-    await contract.actions.data([device_id, 23.0, 50.0, 1041.0]).send();
-    await contract.actions.data([device_id, 15.3, 70.0, 900.0]).send();
+    await contract.actions.data([device_id, 25.5, 60.0, 1013.0]).send(authority);
+    await contract.actions.data([device_id, 23.0, 50.0, 1041.0]).send(authority);
+    await contract.actions.data([device_id, 15.3, 70.0, 900.0]).send(authority);
   });
 
   it("error: account does not exists", async () => {
