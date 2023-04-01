@@ -1,7 +1,7 @@
 # `TAISS` Project **IoT** Smart Contract
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pinax-network/iot.taiss/blob/main/LICENSE-MIT)
-[![Antelope CDT](https://github.com/pinax-network/iot.taiss/actions/workflows/release.yml/badge.svg)](https://github.com/pinax-network/iot.taiss/actions/workflows/release.yml)
-[![Blanc++ Vert](https://github.com/pinax-network/iot.taiss/actions/workflows/ci.yml/badge.svg)](https://github.com/pinax-network/iot.taiss/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/pinax-network/iot.taiss-contract/blob/main/LICENSE-MIT)
+[![Antelope CDT](https://github.com/pinax-network/iot.taiss-contract/actions/workflows/release.yml/badge.svg)](https://github.com/pinax-network/iot.taiss-contract/actions/workflows/release.yml)
+[![Blanc++ Vert](https://github.com/pinax-network/iot.taiss-contract/actions/workflows/ci.yml/badge.svg)](https://github.com/pinax-network/iot.taiss-contract/actions/workflows/ci.yml)
 
 > IoT device interactions to on-chain events.
 
