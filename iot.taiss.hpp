@@ -12,32 +12,30 @@ public:
     /**
      * ## TABLE `devices`
      * 
-     * - scope: `{name} account`
-     * 
      * ### params
      *
      * - `{uint64_t} device_id` - (primary key) IoT Device ID
-     * - `{set<name>} owners` - (secondary key) List of owners
+     * - `{name} authority` - IoT Device Authority
      *
      * ### example
      *
      * ```json
      * {
      *     "device_id": 2199024546082,
-     *     "owners": ["device.taiss"]
+     *     "authority": "device.taiss"
      * }
      * ```
      */
     struct [[eosio::table("devices")]] devices_row {
         uint64_t            device_id;
-        set<name>           owners;
+        name                authority;
 
         uint64_t primary_key() const { return device_id; }
     };
     typedef eosio::multi_index< "devices"_n, devices_row> devices_table;
 
     [[eosio::action]]
-    void setdevice( const uint64_t device_id, const set<name> owners );
+    void setdevice( const uint64_t device_id, const name authority );
 
     [[eosio::action]]
     void deldevice( const uint64_t device_id );

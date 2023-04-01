@@ -54,12 +54,31 @@ Here are some JSON examples of payloads for each of these actions:
 }
 ```
 
+## Tables
+
+## TABLE `devices`
+
+### params
+
+- `{uint64_t} device_id` - (primary key) IoT Device ID
+- `{name} authority` - IoT Device Authority
+
+### example
+
+```json
+{
+    "device_id": 2199024546082,
+    "authority": "device.taiss"
+}
+```
+
+
 ## Actions
 
 ```bash
 # Setup Device
-$ cleos push action iot.taiss setdevice '[90153637939631722, [device.taiss]]' -p iot.taiss
-$ cleos push action iot.taiss deldevice '[90153637939631722]' -p iot.taiss
+$ cleos push action iot.taiss setdevice '[901536379396317224, device.taiss]' -p iot.taiss
+$ cleos push action iot.taiss deldevice '[901536379396317224]' -p iot.taiss
 
 # Data Collection
 $ cleos push action iot.taiss data '[901536379396317224, 25.5, 60.0, 1013.0]' -p device.taiss

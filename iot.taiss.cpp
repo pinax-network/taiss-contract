@@ -1,22 +1,18 @@
 #include "iot.taiss.hpp"
 
 [[eosio::action]]
-void iot::setdevice( const uint64_t device_id, const set<name> owners )
+void iot::setdevice( const uint64_t device_id, const name authority )
 {
     require_auth( get_self() );
     devices_table _devices( get_self(), get_self().value );
 
     // validation
-    check( owners.size() > 0, "owners must be greater than 0" );
-
-    for ( const name owner : owners ) {
-        check( is_account( owner ), "owner account does not exist" );
-    }
+    check( is_account( authority ), "authority account does not exist" );
 
     // insert or update
     auto insert = [&]( auto & row ) {
         row.device_id = device_id;
-        row.owners = owners;
+        row.authority = authority;
     };
     auto devices_itr = _devices.find( device_id );
     if ( devices_itr == _devices.end() ) _devices.emplace( get_self(), insert );
@@ -60,10 +56,7 @@ bool iot::has_authority( const uint64_t device_id )
 {
     devices_table _devices( get_self(), get_self().value );
     auto itr = _devices.get( device_id, "device not found" );
-    for ( name owner : itr.owners ) {
-        if ( has_auth(owner)) return true;
-    }
-    return false;
+    return has_auth(itr.authority);
 }
 
 void iot::check_authority( const uint64_t device_id )
