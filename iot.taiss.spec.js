@@ -23,18 +23,24 @@ function get_device(device_id) {
 
 describe('iot.taiss', () => {
   const device_id = "901536379396317224";
-  const owners = ["device.taiss"];
+  const authority = "device.taiss";
 
   it("setdevice", async () => {
-    await contract.actions.setdevice([device_id, owners]).send();
-    assert.deepEqual(get_user(device_id), {
+    await contract.actions.setdevice([device_id, authority]).send();
+    assert.deepEqual(get_device(device_id), {
       device_id,
-      owners,
+      authority,
     })
   });
 
+  it("data", async () => {
+    await contract.actions.data([device_id, 25.5, 60.0, 1013.0]).send();
+    await contract.actions.data([device_id, 23.0, 50.0, 1041.0]).send();
+    await contract.actions.data([device_id, 15.3, 70.0, 900.0]).send();
+  });
+
   it("error: account does not exists", async () => {
-    const action = contract.actions.setdevice([device_id, ["invalid"]]).send();
+    const action = contract.actions.setdevice([device_id, "invalid"]).send();
     await expectToThrow(action, /owner account does not exist/);
   });
 });
