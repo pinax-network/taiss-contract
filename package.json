@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "iot.taiss",
+  "version": "0.1.0",
+  "description": "TAISS Project IoT",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "blanc++ iot.taiss.cpp -I include",
+    "release": "cdt-cpp iot.taiss.cpp -I include",
+    "test": "node *.spec.js"
+  },
+  "devDependencies": {
+    "@proton/vert": "*"
+  }
+}
