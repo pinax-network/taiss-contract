@@ -12,9 +12,12 @@
 | **Data Collection** | where the device collects data from its sensors and sends it to a server or cloud for further analysis.
 | **Status Updates** | where the device sends information about its current status or state, such as battery life or connectivity.
 | **Control Actions** | where the device receives a command from a user or server to perform an action, such as turning on a light or unlocking a door.
+
+## Payload `JSON` Format
+
 Here are some JSON examples of payloads for each of these actions:
 
-### Data Collection
+#### Data Collection
 
 ```json
 {
@@ -27,7 +30,7 @@ Here are some JSON examples of payloads for each of these actions:
 }
 ```
 
-### Status Updates
+#### Status Updates
 
 ```json
 {
@@ -39,7 +42,7 @@ Here are some JSON examples of payloads for each of these actions:
 }
 ```
 
-### Control Actions
+#### Control Actions
 
 ```json
 {
@@ -50,6 +53,8 @@ Here are some JSON examples of payloads for each of these actions:
   }
 }
 ```
+
+## Actions
 
 ```bash
 # Setup Device
