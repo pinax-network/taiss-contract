@@ -18,7 +18,7 @@ beforeEach(async () => {
 
 function get_device(device_id) {
   const scope = Name.from('iot.taiss').value.value;
-  return contract.tables.users(scope).getTableRow(BigInt(device_id));
+  return contract.tables.devices(scope).getTableRow(BigInt(device_id));
 }
 
 describe('iot.taiss', () => {
