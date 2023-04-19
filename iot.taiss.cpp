@@ -34,11 +34,16 @@ void iot::deldevice( const uint64_t device_id )
 }
 
 [[eosio::action]]
-void iot::data( const uint64_t device_id, const float temparature, const float humidity, const float pressure )
+void iot::temperature( const uint64_t device_id, const float temperature )
 {
     check_authority( device_id );
 }
 
+[[eosio::action]]
+void iot::location( const uint64_t device_id, const float x, const float y, const optional<float> z )
+{
+    check_authority( device_id );
+}
 
 [[eosio::action]]
 void iot::status( const uint64_t device_id, const float battery, const bool connected )

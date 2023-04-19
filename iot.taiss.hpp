@@ -1,6 +1,7 @@
 #include <eosio/eosio.hpp>
 #include <eosio/system.hpp>
 #include <eosio/asset.hpp>
+#include <optional>
 
 using namespace eosio;
 using namespace std;
@@ -11,7 +12,7 @@ public:
 
     /**
      * ## TABLE `devices`
-     * 
+     *
      * ### params
      *
      * - `{uint64_t} device_id` - (primary key) IoT Device ID
@@ -41,7 +42,10 @@ public:
     void deldevice( const uint64_t device_id );
 
     [[eosio::action]]
-    void data( const uint64_t device_id, const float temparature, const float humidity, const float pressure );
+    void temperature( const uint64_t device_id, const float temperature );
+
+    [[eosio::action]]
+    void location( const uint64_t device_id, const float x, const float y, const optional<float> z );
 
     [[eosio::action]]
     void status( const uint64_t device_id, const float battery, const bool connected );

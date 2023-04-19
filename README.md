@@ -17,16 +17,23 @@
 
 Here are some JSON examples of payloads for each of these actions:
 
-#### Data Collection
+#### Temperature
 
 ```json
 {
   "device_id": 901536379396317224,
-  "data": {
-    "temperature": 25.5,
-    "humidity": 60.0,
-    "pressure": 1013.0
-  }
+  "temperature": 25.5
+}
+```
+
+#### Location
+
+```json
+{
+  "device_id": 901536379396317224,
+  "x": 45.4035,
+  "y": -71.8938,
+  "z": 0
 }
 ```
 
@@ -35,10 +42,8 @@ Here are some JSON examples of payloads for each of these actions:
 ```json
 {
   "device_id": 901536379396317224,
-  "status": {
-    "battery": 0.5,
-    "connected": true
-  }
+  "battery": 0.5,
+  "connected": true
 }
 ```
 
@@ -47,10 +52,8 @@ Here are some JSON examples of payloads for each of these actions:
 ```json
 {
   "device_id": 901536379396317224,
-  "action": {
-    "type": "light",
-    "state": "on"
-  }
+  "type": "light",
+  "state": "on"
 }
 ```
 
@@ -67,11 +70,10 @@ Here are some JSON examples of payloads for each of these actions:
 
 ```json
 {
-    "device_id": 2199024546082,
-    "authority": "device.taiss"
+  "device_id": 2199024546082,
+  "authority": "device.taiss"
 }
 ```
-
 
 ## Actions
 
@@ -80,8 +82,11 @@ Here are some JSON examples of payloads for each of these actions:
 $ cleos push action iot.taiss setdevice '[901536379396317224, device.taiss]' -p iot.taiss
 $ cleos push action iot.taiss deldevice '[901536379396317224]' -p iot.taiss
 
-# Data Collection
-$ cleos push action iot.taiss data '[901536379396317224, 25.5, 60.0, 1013.0]' -p device.taiss
+# Temperature
+$ cleos push action iot.taiss temperature '[901536379396317224, 25.5]' -p device.taiss
+
+# Location
+$ cleos push action iot.taiss location '[901536379396317224, 45.4035, -71.8938, 0.0]' -p device.taiss
 
 # Status Updates
 $ cleos push action iot.taiss status '[901536379396317224, 0.5, true]' -p device.taiss
