@@ -5,6 +5,10 @@
 
 > IoT device interactions to on-chain events.
 
+## Related
+
+- [TAISS Substreams](https://github.com/pinax-network/taiss-substreams)
+
 ```mermaid
 graph TD;
   iot[TAISS IoT]
