@@ -5,6 +5,33 @@
 
 > IoT device interactions to on-chain events.
 
+```mermaid
+graph TD;
+  iot[TAISS IoT]
+  actions[Control Actions]
+  iot --> actions
+  actions --> setdevice
+  actions --> temperature
+  actions --> location
+
+  eos[EOS Blockchain] --> newaccount
+  newaccount --> account[EOS Account]
+  authority --> account[account]
+  account --> public_key[Public Key]
+
+  setdevice[setdevice]
+  setdevice --> device_id[device_id]
+  setdevice --> authority[authority]
+
+  temperature[temperature]
+  temperature --> device_id[device_id]
+  temperature --> temp[Temp C.]
+
+  location[location]
+  location --> device_id[device_id]
+  location --> geometry[x,y,z]
+```
+
 ## Events
 
 | Event | Description |
@@ -12,6 +39,7 @@
 | **Data Collection** | where the device collects data from its sensors and sends it to a server or cloud for further analysis.
 | **Status Updates** | where the device sends information about its current status or state, such as battery life or connectivity.
 | **Control Actions** | where the device receives a command from a user or server to perform an action, such as turning on a light or unlocking a door.
+
 
 ## Payload `JSON` Format
 
