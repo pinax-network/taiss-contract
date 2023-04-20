@@ -17,19 +17,31 @@ public:
      *
      * - `{uint64_t} device_id` - (primary key) IoT Device ID
      * - `{name} authority` - IoT Device Authority
+     * - `{vector<float>} location` - IoT Device Location (x, y, z)
+     * - `{float} temperature` - IoT Device Temperature
+     * - `{time_point_sec} timestamp` - IoT Device Timestamp
+     * - `{uint64_t} nonce` - IoT Device Nonce
      *
      * ### example
      *
      * ```json
      * {
      *     "device_id": 2199024546082,
-     *     "authority": "device.taiss"
+     *     "authority": "device.taiss",
+     *     "location": [ 45.4035, -71.8938, 0.0 ],
+     *     "temperature": 37.5,
+     *     "timestamp": "2023-04-19T00:00:00Z",
+     *     "nonce": 10
      * }
      * ```
      */
     struct [[eosio::table("devices")]] devices_row {
         uint64_t            device_id;
         name                authority;
+        vector<float>       location;
+        float               temperature;
+        time_point_sec      timestamp;
+        uint64_t            nonce;
 
         uint64_t primary_key() const { return device_id; }
     };
@@ -46,12 +58,6 @@ public:
 
     [[eosio::action]]
     void location( const uint64_t device_id, const float x, const float y, const optional<float> z );
-
-    [[eosio::action]]
-    void status( const uint64_t device_id, const float battery, const bool connected );
-
-    [[eosio::action]]
-    void action( const uint64_t device_id, const string type, const string state );
 
 private:
     bool has_authority( const uint64_t device_id );

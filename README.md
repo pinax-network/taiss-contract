@@ -40,7 +40,6 @@ graph TD;
 | **Status Updates** | where the device sends information about its current status or state, such as battery life or connectivity.
 | **Control Actions** | where the device receives a command from a user or server to perform an action, such as turning on a light or unlocking a door.
 
-
 ## Payload `JSON` Format
 
 Here are some JSON examples of payloads for each of these actions:
@@ -65,41 +64,27 @@ Here are some JSON examples of payloads for each of these actions:
 }
 ```
 
-#### Status Updates
-
-```json
-{
-  "device_id": 901536379396317224,
-  "battery": 0.5,
-  "connected": true
-}
-```
-
-#### Control Actions
-
-```json
-{
-  "device_id": 901536379396317224,
-  "type": "light",
-  "state": "on"
-}
-```
-
-## Tables
-
 ## TABLE `devices`
 
 ### params
 
 - `{uint64_t} device_id` - (primary key) IoT Device ID
 - `{name} authority` - IoT Device Authority
+- `{vector<float>} location` - IoT Device Location (x, y, z)
+- `{float} temperature` - IoT Device Temperature
+- `{time_point_sec} timestamp` - IoT Device Timestamp
+- `{uint64_t} nonce` - IoT Device Nonce
 
 ### example
 
 ```json
 {
-  "device_id": 2199024546082,
-  "authority": "device.taiss"
+    "device_id": 2199024546082,
+    "authority": "device.taiss",
+    "location": [ 45.4035, -71.8938, 0.0 ],
+    "temperature": 37.5,
+    "timestamp": "2023-04-19T00:00:00Z",
+    "nonce": 10
 }
 ```
 
@@ -115,10 +100,4 @@ $ cleos push action iot.taiss temperature '[901536379396317224, 25.5]' -p device
 
 # Location
 $ cleos push action iot.taiss location '[901536379396317224, 45.4035, -71.8938, 0.0]' -p device.taiss
-
-# Status Updates
-$ cleos push action iot.taiss status '[901536379396317224, 0.5, true]' -p device.taiss
-
-# Control Actions
-$ cleos push action iot.taiss action '[901536379396317224, "light", "on"]' -p device.taiss
 ```

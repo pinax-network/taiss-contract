@@ -37,24 +37,27 @@ void iot::deldevice( const uint64_t device_id )
 void iot::temperature( const uint64_t device_id, const float temperature )
 {
     check_authority( device_id );
+    auto devices = devices_table( get_self(), get_self().value );
+    auto itr = devices.get( device_id, "device not found" );
+    devices.modify( itr, get_self(), [&]( auto & row ) {
+        row.temperature = temperature;
+        row.timestamp = current_time_point();
+        row.nonce += 1;
+    });
 }
 
 [[eosio::action]]
 void iot::location( const uint64_t device_id, const float x, const float y, const optional<float> z )
 {
     check_authority( device_id );
-}
-
-[[eosio::action]]
-void iot::status( const uint64_t device_id, const float battery, const bool connected )
-{
-    check_authority( device_id );
-}
-
-[[eosio::action]]
-void iot::action( const uint64_t device_id, const string type, const string state )
-{
-    check_authority( device_id );
+    auto devices = devices_table( get_self(), get_self().value );
+    auto itr = devices.get( device_id, "device not found" );
+    devices.modify( itr, get_self(), [&]( auto & row ) {
+        row.location = { x, y };
+        if ( z ) row.location.push_back( *z );
+        row.timestamp = current_time_point();
+        row.nonce += 1;
+    });
 }
 
 bool iot::has_authority( const uint64_t device_id )
