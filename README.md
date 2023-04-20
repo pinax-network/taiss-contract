@@ -5,6 +5,20 @@
 
 > IoT device interactions to on-chain events.
 
+## Related
+
+- [TAISS Substreams](https://github.com/pinax-network/taiss-substreams)
+
+## Events
+
+| Event | Description |
+| --- | --- |
+| **Data Collection** | where the device collects data from its sensors and sends it to a server or cloud for further analysis.
+| **Status Updates** | where the device sends information about its current status or state, such as battery life or connectivity.
+| **Control Actions** | where the device receives a command from a user or server to perform an action, such as turning on a light or unlocking a door.
+
+## Diagram
+
 ```mermaid
 graph TD;
   iot[TAISS IoT]
@@ -31,14 +45,6 @@ graph TD;
   location --> device_id[device_id]
   location --> geometry[x,y,z]
 ```
-
-## Events
-
-| Event | Description |
-| --- | --- |
-| **Data Collection** | where the device collects data from its sensors and sends it to a server or cloud for further analysis.
-| **Status Updates** | where the device sends information about its current status or state, such as battery life or connectivity.
-| **Control Actions** | where the device receives a command from a user or server to perform an action, such as turning on a light or unlocking a door.
 
 ## Payload `JSON` Format
 
