@@ -22,15 +22,15 @@ function get_device(device_id) {
 }
 
 describe('iot.taiss', () => {
-  const device_id = "901536379396317224";
+  const device_id = "100000";
   const authority = "device.taiss";
 
   it("setdevice", async () => {
-    await contract.actions.setdevice([device_id, authority]).send();
-    assert.deepEqual(get_device(device_id), {
-      device_id,
-      authority,
-    })
+    await contract.actions.setdevice([null, authority, null, null]).send();
+    const device = get_device(device_id);
+    console.log(device);
+    assert.equal(device_id, device.device_id);
+    assert.equal(authority, device.authority);
   });
 
   it("temperature", async () => {

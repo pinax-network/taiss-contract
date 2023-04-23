@@ -76,16 +76,20 @@ Here are some JSON examples of payloads for each of these actions:
 
 - `{uint64_t} device_id` - (primary key) IoT Device ID
 - `{name} authority` - IoT Device Authority
+- `{string} transmitter_signature` - IoT Device Transmitter Signature
+- `{string} receiver_signature` - IoT Device Receiver Signature
 - `{vector<float>} location` - IoT Device Location (x, y, z)
-- `{float} temperature` - IoT Device Temperature
-- `{time_point_sec} timestamp` - IoT Device Timestamp
+- `{float} [temperature]` - IoT Device Temperature
+- `{time_point_sec} [timestamp]` - IoT Device Timestamp
 - `{uint64_t} nonce` - IoT Device Nonce
 
 ### example
 
 ```json
 {
-    "device_id": 2199024546082,
+    "device_id": 100000,
+    "transmitter_signature": "aabbccddeeff/2",
+    "receiver_signature": "aabbccddeeff/3",
     "authority": "device.taiss",
     "location": [ 45.4035, -71.8938, 0.0 ],
     "temperature": 37.5,
@@ -98,7 +102,7 @@ Here are some JSON examples of payloads for each of these actions:
 
 ```bash
 # Setup Device
-$ cleos push action iot.taiss setdevice '[901536379396317224, device.taiss]' -p iot.taiss
+$ cleos push action iot.taiss setdevice '["aabbccddeeff/2", "aabbccddeeff/3", device.taiss]' -p iot.taiss
 $ cleos push action iot.taiss deldevice '[901536379396317224]' -p iot.taiss
 
 # Temperature
