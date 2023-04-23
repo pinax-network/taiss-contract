@@ -86,7 +86,7 @@ Here are some JSON examples of payloads for each of these actions:
     "device_id": 100000,
     "type": "transmitter",
     "signature": "aabbccddeeff/2",
-    "authority": "r.1.taiss",
+    "authority": "device.taiss",
     "timestamp": "2023-04-19T00:00:00Z",
     "nonce": 10
 }

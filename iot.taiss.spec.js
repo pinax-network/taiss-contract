@@ -9,7 +9,7 @@ const blockchain = new Blockchain()
 // contracts
 const contract = blockchain.createContract('iot.taiss', 'iot.taiss', true);
 
-blockchain.createAccounts('device.taiss', 't.1.taiss', 'r.1.taiss');
+blockchain.createAccounts('device.taiss');
 
 // one-time setup
 beforeEach(async () => {
