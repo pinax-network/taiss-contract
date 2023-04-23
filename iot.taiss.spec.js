@@ -9,7 +9,7 @@ const blockchain = new Blockchain()
 // contracts
 const contract = blockchain.createContract('iot.taiss', 'iot.taiss', true);
 
-blockchain.createAccounts('device.taiss');
+blockchain.createAccounts('device.taiss', 't.1.taiss', 'r.1.taiss');
 
 // one-time setup
 beforeEach(async () => {
@@ -18,35 +18,57 @@ beforeEach(async () => {
 
 function get_device(device_id) {
   const scope = Name.from('iot.taiss').value.value;
-  return contract.tables.devices(scope).getTableRow(BigInt(device_id));
+  return contract.tables.devices(scope).getTableRow(BigInt(String(device_id)));
+}
+
+function set_device(device) {
+  return contract.actions.setdevice([device.signature, device.type, device.authority]).send();
 }
 
 describe('iot.taiss', () => {
-  const device_id = "100000";
-  const authority = "device.taiss";
+  const authority = 'device.taiss';
+  const transmitter = {
+    signature:'aabbccddeeff/2',
+    type: "transmitter",
+    authority,
+    device_id: 100000,
+  }
+  const receiver = {
+    signature: 'aabbccddeeff/3',
+    type: "receiver",
+    authority,
+    device_id: 100001,
+  }
 
   it("setdevice", async () => {
-    await contract.actions.setdevice([null, authority, null, null]).send();
-    const device = get_device(device_id);
-    console.log(device);
-    assert.equal(device_id, device.device_id);
-    assert.equal(authority, device.authority);
+    await set_device(transmitter);
+    await set_device(receiver);
+    const device = get_device(transmitter.device_id);
+    assert.equal(transmitter.authority, device.authority);
+    assert.equal(transmitter.signature, device.signature);
+    assert.equal(transmitter.type, device.type);
+    assert.equal(transmitter.device_id, device.device_id);
   });
 
   it("temperature", async () => {
-    await contract.actions.temperature([device_id, 25.5]).send(authority);
-    await contract.actions.temperature([device_id, 23.0]).send(authority);
-    await contract.actions.temperature([device_id, 15.3]).send(authority);
+    await contract.actions.temperature([transmitter.signature, receiver.signature, 25.5]).send(authority);
+    await contract.actions.temperature([transmitter.signature, receiver.signature, 23.0]).send(authority);
+    await contract.actions.temperature([transmitter.signature, receiver.signature, 15.3]).send(authority);
   });
 
   it("location", async () => {
-    await contract.actions.location([device_id, 45.4035, -71.8938, 0.0]).send(authority);
-    await contract.actions.location([device_id, 45.4035, -71.8938, null]).send(authority);
+    await contract.actions.location([transmitter.signature, receiver.signature, [45.4035, -71.8938, 0.0]]).send(authority);
+    await contract.actions.location([transmitter.signature, receiver.signature, [45.4035, -71.8938]]).send(authority);
   });
 
   it("error: account does not exists", async () => {
-    const action = contract.actions.setdevice([device_id, "invalid"]).send();
+    const action = contract.actions.setdevice(['aabbccddeeff/4', "transmitter", "invalid"]).send();
     await expectToThrow(action, /authority account does not exist/);
+  });
+
+  it("error: invalid type", async () => {
+    const action = contract.actions.setdevice(['aabbccddeeff/4', "foobar", "device.taiss"]).send();
+    await expectToThrow(action, /invalid device type \(ex: transmitter, receiver\)/);
   });
 });
 
