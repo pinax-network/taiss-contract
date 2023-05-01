@@ -107,3 +107,9 @@ $ cleos push action iot.taiss location '["aabbccddeeff/2", "aabbccddeeff/3", [45
 # Delete Device
 $ cleos push action iot.taiss deldevice '["aabbccddeeff/2"]' -p iot.taiss
 ```
+
+## Decentralized Identifiers
+
+- [EPC](https://en.wikipedia.org/wiki/Electronic_Product_Code)
+- [MAC-48](https://en.wikipedia.org/wiki/MAC_address)
+- [DID](https://www.w3.org/TR/did-core)
